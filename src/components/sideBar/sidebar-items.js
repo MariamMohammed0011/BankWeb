@@ -55,7 +55,7 @@ export const sidebarManager = [
       { text: "Dashboard", icon: HomeOutlined, path: "/" },
        { text: "Add AccountsTypes", icon: ContactsOutlined, path: "/accountType" },
        { text: "All AccountsTypes", icon: ReceiptOutlined, path: "/account-types" },
-   { text: "Add Clients", icon: GroupAddOutlined, path: "/addClient" },
+      { text: "Add Clients", icon: GroupAddOutlined, path: "/addClient" },
       { text: "All Accounts", icon: TaskAltOutlined, path: "/getAllAccount" },
      { text: "Add SubAccounts", icon: SubtitlesOutlined, path: "/sub-accounts/add" },
       { text: "SubAccountsList", icon: DnsOutlined, path: "/sub-accounts" },
@@ -63,12 +63,14 @@ export const sidebarManager = [
       { text: "Add Features", icon: ReceiptOutlined, path: "/features/add" },
       { text: "All Features", icon: TaskAltOutlined, path: "/features" },
     
-      { text: "Complaint History", icon: HistoryOutlined, path: "/history" },
+      { text: "Approvals Pending", icon: HistoryOutlined, path: "/approvals/pending" },
     ],
   },
   {
     id: "tools",
     items: [
+      
+      { text: "Complaint History", icon: HistoryOutlined, path: "/history" },
       { text: "Notifications", icon: NotificationsOutlined, path: "/notifications" },
       { text: "Messages", icon: ChatOutlined, path: "/messages" },
       { text: "Reports", icon: BarChartOutlined, path: "/reports" },

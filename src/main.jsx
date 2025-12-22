@@ -31,6 +31,7 @@ import AddSubAccount from "./pages/SubAccount/AddSubAccount.jsx";
 import Deposit from "./pages/Transactions/Deposit.jsx";
 import Withdrawal from "./pages/Transactions/Withdrawal.jsx";
 import Transfer from "./pages/Transactions/Transfer.jsx";
+import PendingApprovals from "./pages/PendingApprovals.jsx";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -61,6 +62,8 @@ const router = createBrowserRouter(
         <Route path="/transactions/deposit" element={<Deposit />} />
         <Route path="/transactions/Withdrawal" element={<Withdrawal />} />
         <Route path="/transactions/transfer" element={<Transfer />} />
+        <Route path="/approvals/pending" element={<PendingApprovals />} />
+
       </Route>
     </>
   )
