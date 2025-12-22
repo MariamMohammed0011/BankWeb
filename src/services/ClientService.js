@@ -8,33 +8,7 @@ export const useClientService = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
 
-  /* =========================
-     ADD CLIENT
-  ========================= */
-  // const addClient = async (formData) => {
-  //   setLoading(true);
-  //   setError(null);
-  //   setSuccess(false);
-
-  //   try {
-  //     const fd = new FormData();
-  //     Object.keys(formData).forEach((key) => {
-  //       fd.append(key, formData[key]);
-  //     });
-
-  //     await axios.post("/Client/add", fd, {
-  //       headers: { "Content-Type": "multipart/form-data" },
-  //     });
-
-  //     setSuccess(true);
-  //     return true;
-  //   } catch (err) {
-  //     setError(err.response?.data?.message || "Error adding client");
-  //     throw err;
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+ 
 const addClient = async (formData) => {
   setLoading(true);
   setError(null);
@@ -51,7 +25,7 @@ const addClient = async (formData) => {
     });
 
     setSuccess(true);
-    return res.data.client; // <-- الآن يرجع الـ client الجديد
+    return res.data.client; 
   } catch (err) {
     setError(err.response?.data?.message || "Error adding client");
     throw err;
@@ -60,9 +34,6 @@ const addClient = async (formData) => {
   }
 };
 
-  /* =========================
-     GET CLIENT BY ID
-  ========================= */
   const getClientById = async (id) => {
     setLoading(true);
     setError(null);
@@ -78,9 +49,6 @@ const addClient = async (formData) => {
     }
   };
 
-  /* =========================
-     GET ALL CLIENTS
-  ========================= */
   const getClients = async () => {
     setLoading(true);
     setError(null);
@@ -96,9 +64,6 @@ const addClient = async (formData) => {
     }
   };
 
-  /* =========================
-     UPDATE CLIENT
-  ========================= */
   const updateClient = async (id, body) => {
     setLoading(true);
     setError(null);

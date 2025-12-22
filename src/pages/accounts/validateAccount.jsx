@@ -1,20 +1,4 @@
-// export const validateAccount = ({ clientId, accountTypeId }) => {
-//   const errors = {};
 
-//   if (!clientId) {
-//     errors.clientId = "رقم العميل مطلوب";
-//   } else if (isNaN(clientId)) {
-//     errors.clientId = "رقم العميل يجب أن يكون رقمًا صحيحًا";
-//   }
-
-//   if (!accountTypeId) {
-//     errors.accountTypeId = "نوع الحساب مطلوب";
-//   } else if (isNaN(accountTypeId)) {
-//     errors.accountTypeId = "رقم نوع الحساب غير صالح";
-//   }
-
-//   return errors;
-// };
 export const validateAccount = ({
   clientId,
   accountTypeId,

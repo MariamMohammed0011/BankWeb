@@ -29,15 +29,15 @@ export default function AccountDetails() {
         width: "75%",
         mx: "auto",
         mt: 4,
-        direction: "rtl", // ضبط اتجاه عربي بالكامل
+        direction: "rtl", 
         textAlign: "right",
       }}
     >
-      {/* زر رجوع احترافي */}
+      
       <Stack direction="row" alignItems="center" mb={3}>
         <Button
   variant="outlined"
-  startIcon={<ArrowBackIosNewIcon sx={{ ml: 1.5 }} />} // mr = marginRight
+  startIcon={<ArrowBackIosNewIcon sx={{ ml: 1.5 }} />} 
   onClick={() => navigate("/getAllAccount")}
   sx={{
     borderRadius: "30px",
@@ -59,7 +59,7 @@ export default function AccountDetails() {
 
       </Stack>
 
-      {/* الكارد */}
+     
       <Paper
         sx={{
           p: 4,
@@ -75,7 +75,7 @@ export default function AccountDetails() {
           },
         }}
       >
-        {/* العنوان */}
+       
         <Stack
           direction="row"
           alignItems="center"
@@ -92,7 +92,7 @@ export default function AccountDetails() {
           </Typography>
         </Stack>
 
-        {/* المحتوى */}
+        
         <Box sx={{ mt: 5, lineHeight: 5 }} >
           <Typography variant="body1" fontSize="18px" mb={2}>
             <strong>اسم العميل:</strong> {account.clientFullName}

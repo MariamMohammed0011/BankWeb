@@ -66,26 +66,26 @@ export default function AllAccounts() {
                 <TableCell>{acc.createdAt}</TableCell>
 
                 <TableCell>
-                 <Button
-  variant="outlined"
-  onClick={() =>
-    navigate(`/accounts/details`, { state: { account: acc } })
-  }
->
-  التفاصيل
-</Button>
+                  <Button
+                    variant="outlined"
+                    onClick={() =>
+                      navigate(`/accounts/details`, { state: { account: acc } })
+                    }
+                  >
+                    التفاصيل
+                  </Button>
 
-
-                 <Button
-  sx={{ ml: 1 }}
-  variant="contained"
-  onClick={() =>
-    navigate(`/accounts/edit/${acc.clientAccountId }`, { state: { account: acc } })
-  }
->
-  تعديل
-</Button>
-
+                  <Button
+                    sx={{ ml: 1 }}
+                    variant="contained"
+                    onClick={() =>
+                      navigate(`/accounts/edit/${acc.clientAccountId}`, {
+                        state: { account: acc },
+                      })
+                    }
+                  >
+                    تعديل
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}

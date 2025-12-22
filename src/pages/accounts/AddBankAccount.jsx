@@ -35,8 +35,8 @@ useEffect(() => {
   const fetchAccounts = async () => {
     try {
       const types = await getAccountTypes();
-      console.log("Account types:", types); // تأكد من الكونسول
-      setAccountTypes(types || []); // types يجب أن تكون مصفوفة
+      console.log("Account types:", types); 
+      setAccountTypes(types || []); 
     } catch (err) {
       console.error(err);
     }
@@ -94,7 +94,7 @@ useEffect(() => {
 >
   {accountTypes.map((type) => (
     <MenuItem key={type.accountTypeId} value={type.accountTypeId}>
-      {type.typeName} {/* حقل typeName لعرض اسم الحساب */}
+      {type.typeName} 
     </MenuItem>
   ))}
 </TextField>

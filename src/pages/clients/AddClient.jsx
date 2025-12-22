@@ -21,7 +21,7 @@ import { useClientFacade } from "../../facades/ClientFacade";
 export default function AddClient() {
   const navigate = useNavigate();
   const { addClient, loading, error, success } = useClientService();
-const clientFacade = useClientFacade(); // ✅ استدعاء الفاساد
+  const clientFacade = useClientFacade();
 
   const [formData, setFormData] = useState({
     FirstName: "",
@@ -47,76 +47,29 @@ const clientFacade = useClientFacade(); // ✅ استدعاء الفاساد
     }));
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const validationErrors = validateClient(formData);
-  //   setErrors(validationErrors);
-  //   if (Object.keys(validationErrors).length > 0) return;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  //   try {
-  //     await addClient(formData);
-  //     setTimeout(() => navigate("/"), 1000);
-  //     setFormData({
-  //       FirstName: "",
-  //       MiddleName: "",
-  //       LastName: "",
-  //       IdentityNumber: "",
-  //       IdentityImage: null,
-  //       IncomeSource: "",
-  //       MonthlyIncome: "",
-  //       AccountPurpose: "",
-  //       Phone: "",
-  //       Username: "",
-  //       Password: "",
-  //     });
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
-// const handleSubmit = async (e) => {
-//   e.preventDefault();
+    const validationErrors = validateClient(formData);
+    setErrors(validationErrors);
+    if (Object.keys(validationErrors).length > 0) return;
 
-//   const validationErrors = validateClient(formData);
-//   setErrors(validationErrors);
-//   if (Object.keys(validationErrors).length > 0) return;
+    try {
+      const result = await clientFacade.registerClientWithAccount(formData, 1);
 
-//   try {
-//     const client = await addClient(formData); // client جديد هنا
-//     const clientId = client.clientId;
-//     console.log("Client ID:", clientId); // للتأكد
-//     navigate("/addAccount", { state: { clientId } });
-//   } catch (err) {
-//     console.error(err);
-//   }
-// };
-const handleSubmit = async (e) => {
-  e.preventDefault();
+      if (result.success) {
+        const { client, account } = result;
+        console.log("Client:", client);
+        console.log("Account:", account);
 
-  const validationErrors = validateClient(formData);
-  setErrors(validationErrors);
-  if (Object.keys(validationErrors).length > 0) return;
-
-  try {
-    // استدعاء الفاساد لإنشاء العميل وفتح الحساب
-    const result = await clientFacade.registerClientWithAccount(
-      formData,
-      1 // هنا مثال على AccountTypeId، ممكن تغيّره حسب اختيار المستخدم
-    );
-
-    if (result.success) {
-      const { client, account } = result;
-      console.log("Client:", client);
-      console.log("Account:", account);
-
-      navigate("/addAccount", { state: { clientId: client.clientId } });
-    } else {
-      console.error("Facade Error:", result.error);
+        navigate("/addAccount", { state: { clientId: client.clientId } });
+      } else {
+        console.error("Facade Error:", result.error);
+      }
+    } catch (err) {
+      console.error("Unexpected Error:", err);
     }
-  } catch (err) {
-    console.error("Unexpected Error:", err);
-  }
-};
-
+  };
 
   return (
     <Box sx={{ width: "90%", mx: "auto", mt: 3 }}>
@@ -130,7 +83,6 @@ const handleSubmit = async (e) => {
 
         <form onSubmit={handleSubmit}>
           <Stack spacing={2}>
-            {/* الحقول الأخرى */}
             <TextField
               label="الاسم الأول"
               name="FirstName"
@@ -156,17 +108,16 @@ const handleSubmit = async (e) => {
               error={!!errors.LastName}
               helperText={errors.LastName}
             />
-<TextField
-  label="رقم الهوية"
-  name="IdentityNumber"
-  value={formData.IdentityNumber}
-  onChange={handleChange}
-  error={!!errors.IdentityNumber}
-  helperText={errors.IdentityNumber}
-  inputProps={{ maxLength: 12 }}
-/>
+            <TextField
+              label="رقم الهوية"
+              name="IdentityNumber"
+              value={formData.IdentityNumber}
+              onChange={handleChange}
+              error={!!errors.IdentityNumber}
+              helperText={errors.IdentityNumber}
+              inputProps={{ maxLength: 12 }}
+            />
 
-            {/* زر رفع الهوية المحسن */}
             <Box
               sx={{
                 border: "1px dashed #1976d2",
@@ -197,7 +148,6 @@ const handleSubmit = async (e) => {
               <Typography color="error">{errors.IdentityImage}</Typography>
             )}
 
-            {/* باقي الحقول */}
             <TextField
               label="مصدر الدخل"
               name="IncomeSource"

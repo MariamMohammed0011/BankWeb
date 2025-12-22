@@ -8,9 +8,6 @@ export const useFeatureService = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
 
-  /* =========================
-     ADD FEATURE
-  ========================= */
   const addFeature = async (formData) => {
     setLoading(true);
     setError(null);
@@ -25,7 +22,7 @@ export const useFeatureService = () => {
       const res = await axios.post("/Feature/Add_Feature", body);
 
       setSuccess(true);
-      // نفترض أن الـ API يرجع featureId
+      
       return res.data; 
     } catch (err) {
       setError(err.response?.data?.message || "Error adding feature");
@@ -35,9 +32,6 @@ export const useFeatureService = () => {
     }
   };
 
-  /* =========================
-     ASSIGN FEATURE TO ACCOUNT TYPES
-  ========================= */
   const assignFeatureToAccountTypes = async (featureId, accountTypeIds) => {
     setLoading(true);
     setError(null);

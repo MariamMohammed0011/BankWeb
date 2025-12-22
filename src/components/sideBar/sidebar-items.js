@@ -14,7 +14,11 @@ import {
   TaskAltOutlined,
   HistoryOutlined ,
   NotificationsOutlined,
-   SubtitlesOutlined 
+   SubtitlesOutlined ,
+   MoveDownOutlined,
+   SaveAltOutlined,
+   RocketLaunchOutlined,
+   GroupAddOutlined
 } from "@mui/icons-material";
 
 export const sidebarAdmin  = [
@@ -51,13 +55,14 @@ export const sidebarManager = [
       { text: "Dashboard", icon: HomeOutlined, path: "/" },
        { text: "Add AccountsTypes", icon: ContactsOutlined, path: "/accountType" },
        { text: "All AccountsTypes", icon: ReceiptOutlined, path: "/account-types" },
-   { text: "Add Clients", icon: ReceiptOutlined, path: "/addClient" },
+   { text: "Add Clients", icon: GroupAddOutlined, path: "/addClient" },
       { text: "All Accounts", icon: TaskAltOutlined, path: "/getAllAccount" },
      { text: "Add SubAccounts", icon: SubtitlesOutlined, path: "/sub-accounts/add" },
       { text: "SubAccountsList", icon: DnsOutlined, path: "/sub-accounts" },
       
       { text: "Add Features", icon: ReceiptOutlined, path: "/features/add" },
       { text: "All Features", icon: TaskAltOutlined, path: "/features" },
+    
       { text: "Complaint History", icon: HistoryOutlined, path: "/history" },
     ],
   },
@@ -83,8 +88,12 @@ export const sidebarTeller = [
     id: "main",
     items: [
       { text: "Dashboard", icon: HomeOutlined, path: "/" },
-      { text: "Add Clients", icon: ReceiptOutlined, path: "/addClient" },
+      { text: "Add Clients", icon: GroupAddOutlined, path: "/addClient" },
       { text: "All Accounts", icon: TaskAltOutlined, path: "/getAllAccount" },
+      { text: "deposite ", icon: SaveAltOutlined, path: "/transactions/deposit" },
+       { text: "Withdrawal ", icon: RocketLaunchOutlined, path: "/transactions/Withdrawal" },
+       { text: "transfer ", icon: MoveDownOutlined, path: "/transactions/transfer" },
+      
       { text: "Complaint History", icon: HistoryOutlined, path: "/history" },
     ],
   },

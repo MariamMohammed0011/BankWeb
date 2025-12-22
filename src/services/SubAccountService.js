@@ -15,15 +15,34 @@ export const useSubAccountService = () => {
   setSuccess(null);
 
   try {
-    const formData = new FormData();
-    formData.append("ParentAccountId", Number(data.ParentAccountId));
+    console.log("📦 RAW DATA FROM FORM:");
+Object.entries(data).forEach(([key, value]) => {
+  console.log(
+    `${key}:`,
+    value,
+    `| type:`,
+    value === null ? "null" : typeof value
+  );
+});
+const formData = new FormData();
 
-    formData.append("DailyWithdrawalLimit", Number(data.DailyWithdrawalLimit) || 0);
-    formData.append("TransferLimit", Number(data.TransferLimit) || 0);
-    formData.append("UsageAreas", data.UsageAreas || "");
-    formData.append("UserPermissions", data.UserPermissions || "");
-    formData.append("Balance", Number(data.Balance) || 0);
-    formData.append("CreatedAt", data.CreatedAt ? new Date(data.CreatedAt).toISOString() : new Date().toISOString());
+formData.append("ParentAccountId", Number(data.ParentAccountId));
+formData.append("StatusId", Number(statusId));
+formData.append("SubAccountTypeId", Number(subAccountTypeId));
+
+formData.append("DailyWithdrawalLimit", Number(data.DailyWithdrawalLimit) || 0);
+formData.append("TransferLimit", Number(data.TransferLimit) || 0);
+formData.append("Balance", Number(data.Balance) || 0);
+formData.append("UsageAreas", data.UsageAreas || "");
+formData.append("UserPermissions", data.UserPermissions || "");
+
+if (data.CreatedAt) {
+  formData.append(
+    "CreatedAt",
+    new Date(data.CreatedAt).toISOString()
+  );
+}
+
 for (let [key, value] of formData.entries()) {
   console.log(key, value);
 }

@@ -19,24 +19,22 @@ function Login() {
   const navigate = useNavigate();
   const { errors, validateForm } = useFormValidation();
   const { loginRequest, loading, error: apiError } = useLogin();
- 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm({ Username, password })) return;
 
     try {
       const data = await loginRequest(Username, password);
-console.log(data.role);
+      console.log(data.role);
       login(data.token, data.role);
 
-     // Strategy
-  const strategy = LoginStrategyFactory.getStrategy(data.role);
-  strategy.loginAction(data, navigate);
-  
-} catch (err) {
-  console.log("Login failed:", err);
-}
-    
+      // Strategy
+      const strategy = LoginStrategyFactory.getStrategy(data.role);
+      strategy.loginAction(data, navigate);
+    } catch (err) {
+      console.log("Login failed:", err);
+    }
   };
 
   return (
@@ -46,12 +44,15 @@ console.log(data.role);
       <div className="relative z-10 flex items-center justify-center min-h-[calc(100vh-64px)] px-4 py-8">
         <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-12 items-center">
           <div className="text-white text-center md:text-left space-y-4 sm:space-y-6 order-2 md:order-1">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-4xl font-bold leading-tight">
-              Government complaints management
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-3xl font-bold leading-tight">
+              Banking Management System
             </h1>
+
             <p className="text-sm sm:text-base md:text-lg lg:text-xl opacity-90 max-w-md mx-auto md:mx-0">
-              Together, let's make serving the citizen easier.
+              Manage customer accounts and streamline banking operations with
+              ease.
             </p>
+
             <Suspense
               fallback={<div className="text-white">Loading icon...</div>}
             >
@@ -77,7 +78,7 @@ console.log(data.role);
                     Username ? "top-1 text-xs" : "top-4 text-lg"
                   }`}
                 >
-                 Username
+                  Username
                 </span>
                 <input
                   type="text"

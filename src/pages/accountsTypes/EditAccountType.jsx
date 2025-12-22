@@ -28,10 +28,8 @@ export default function EditAccountType() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
 
-  // helper: check positive number
   const isPositiveNumber = (value) => /^[0-9]*\.?[0-9]+$/.test(value);
 
-  // Load Data
   useEffect(() => {
     const fetch = async () => {
       const data = await getAccountTypeById(id);
@@ -47,67 +45,60 @@ export default function EditAccountType() {
     fetch();
   }, [id]);
 
-  // ---------------- VALIDATION ----------------
   const validate = () => {
     const newErrors = {};
 
-    // Type Name
     if (!formData.typeName.trim()) {
       newErrors.typeName = "اسم الحساب مطلوب";
     } else if (!/^[\u0600-\u06FFa-zA-Z ]+$/.test(formData.typeName)) {
-      newErrors.typeName = "اسم الحساب يجب أن يحتوي على أحرف عربية أو إنجليزية فقط";
+      newErrors.typeName =
+        "اسم الحساب يجب أن يحتوي على أحرف عربية أو إنجليزية فقط";
     }
 
-    // Annual interest rate
     if (formData.annualInterestRate === "") {
       newErrors.annualInterestRate = "الفائدة السنوية مطلوبة";
     } else if (!isPositiveNumber(formData.annualInterestRate)) {
       newErrors.annualInterestRate = "يجب إدخال رقم موجب فقط";
     }
 
-    // Daily Withdrawal
     if (formData.dailyWithdrawalLimit === "") {
       newErrors.dailyWithdrawalLimit = "حد السحب اليومي مطلوب";
     } else if (!isPositiveNumber(formData.dailyWithdrawalLimit)) {
       newErrors.dailyWithdrawalLimit = "يجب إدخال رقم موجب فقط";
     }
 
-    // Monthly Fee
     if (formData.monthlyFee === "") {
       newErrors.monthlyFee = "الرسوم الشهرية مطلوبة";
     } else if (!isPositiveNumber(formData.monthlyFee)) {
       newErrors.monthlyFee = "يجب إدخال رقم موجب فقط";
     }
 
-    // Terms & Conditions
     if (!formData.termsAndConditions.trim()) {
       newErrors.termsAndConditions = "الشروط والأحكام مطلوبة";
     } else if (
       formData.termsAndConditions.length < 10 ||
       formData.termsAndConditions.length > 500
     ) {
-      newErrors.termsAndConditions =
-        "الشروط يجب أن تكون بين 10 و 500 محرف";
+      newErrors.termsAndConditions = "الشروط يجب أن تكون بين 10 و 500 محرف";
     }
 
     return newErrors;
   };
 
-  // ---------------- HANDLE CHANGE ----------------
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // رقم فقط للحقول الرقمية أثناء الكتابة
     if (
-      ["annualInterestRate", "dailyWithdrawalLimit", "monthlyFee"].includes(name)
+      ["annualInterestRate", "dailyWithdrawalLimit", "monthlyFee"].includes(
+        name
+      )
     ) {
-      if (value !== "" && !/^[0-9]*\.?[0-9]*$/.test(value)) return; // يمنع كتابة أي حرف
+      if (value !== "" && !/^[0-9]*\.?[0-9]*$/.test(value)) return;
     }
 
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // ---------------- SUBMIT ----------------
   const handleSubmit = async () => {
     const validationErrors = validate();
     setErrors(validationErrors);
@@ -117,8 +108,7 @@ export default function EditAccountType() {
     setSaving(true);
     await updateAccountType(id, formData);
     setSaving(false);
-  navigate(`/account-types/${id}`);
-
+    navigate(`/account-types/${id}`);
   };
 
   if (loading)
@@ -130,10 +120,12 @@ export default function EditAccountType() {
 
   return (
     <Box sx={{ width: "90%", mx: "auto", mt: 3 }}>
-      <Header title="تعديل نوع الحساب" subTitle="تعديل بيانات نوع الحساب البنكي" />
+      <Header
+        title="تعديل نوع الحساب"
+        subTitle="تعديل بيانات نوع الحساب البنكي"
+      />
 
       <Paper sx={{ p: 4 }} elevation={3}>
-        {/* typeName */}
         <TextField
           label="اسم الحساب"
           fullWidth
@@ -157,7 +149,6 @@ export default function EditAccountType() {
           sx={{ mb: 3 }}
         />
 
-        {/* dailyWithdrawalLimit */}
         <TextField
           label="حد السحب اليومي"
           fullWidth
@@ -169,7 +160,6 @@ export default function EditAccountType() {
           sx={{ mb: 3 }}
         />
 
-        {/* monthlyFee */}
         <TextField
           label="الرسوم الشهرية"
           fullWidth
@@ -181,7 +171,6 @@ export default function EditAccountType() {
           sx={{ mb: 3 }}
         />
 
-        {/* terms */}
         <TextField
           label="الشروط والأحكام"
           fullWidth
@@ -195,7 +184,6 @@ export default function EditAccountType() {
           sx={{ mb: 3 }}
         />
 
-        {/* Buttons */}
         <Box mt={3} display="flex" justifyContent="space-between">
           <Button variant="outlined" onClick={() => navigate("/account-types")}>
             إلغاء

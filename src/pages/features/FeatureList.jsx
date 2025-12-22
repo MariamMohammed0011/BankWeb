@@ -17,9 +17,9 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  Button
+  Button,
 } from "@mui/material";
-import DeleteSweepOutlinedIcon from '@mui/icons-material/DeleteSweepOutlined';
+import DeleteSweepOutlinedIcon from "@mui/icons-material/DeleteSweepOutlined";
 import Header from "../../components/Header.jsx";
 import { useFeatureService } from "../../services/FeatureService.js";
 import { useAccountTypeService } from "../../services/AccountService.js";
@@ -29,16 +29,16 @@ export default function FeatureList() {
     getFeatures,
     deleteFeature,
     loading: loadingFeatures,
-    error: errorFeatures
+    error: errorFeatures,
   } = useFeatureService();
-const fetchAccountTypes = async () => {
-  try {
-    const data = await getAccountTypes();
-    setAccountTypes(data);
-  } catch (err) {
-    console.log(err);
-  }
-};
+  const fetchAccountTypes = async () => {
+    try {
+      const data = await getAccountTypes();
+      setAccountTypes(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const { getAccountTypes, loading: loadingAccounts } = useAccountTypeService();
 
@@ -46,7 +46,6 @@ const fetchAccountTypes = async () => {
   const [accountTypes, setAccountTypes] = useState([]);
   const [selectedAccountType, setSelectedAccountType] = useState("");
 
-  // Dialog
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [featureToDelete, setFeatureToDelete] = useState(null);
 
@@ -69,7 +68,7 @@ const fetchAccountTypes = async () => {
       await deleteFeature(featureToDelete.featureId);
       setOpenDeleteDialog(false);
       setFeatureToDelete(null);
-      fetchFeatures(); // تحديث القائمة بعد الحذف
+      fetchFeatures();
     } catch (err) {
       console.log(err);
     }
@@ -106,7 +105,9 @@ const fetchAccountTypes = async () => {
 
       <Paper sx={{ p: 4 }} elevation={3}>
         {(loadingFeatures || loadingAccounts) && <CircularProgress />}
-        {errorFeatures && <Typography color="error">{errorFeatures}</Typography>}
+        {errorFeatures && (
+          <Typography color="error">{errorFeatures}</Typography>
+        )}
 
         {!loadingFeatures && filteredFeatures.length === 0 && (
           <Typography>No features available.</Typography>
@@ -123,8 +124,8 @@ const fetchAccountTypes = async () => {
                   transition: "0.3s",
                   "&:hover": {
                     transform: "scale(1.01)",
-                    boxShadow: "0 6px 18px rgba(0,0,0,0.15)"
-                  }
+                    boxShadow: "0 6px 18px rgba(0,0,0,0.15)",
+                  },
                 }}
               >
                 {/* زر حذف */}
@@ -139,23 +140,27 @@ const fetchAccountTypes = async () => {
                   <DeleteSweepOutlinedIcon />
                 </IconButton>
 
-                {/* اسم الميزة */}
                 <Typography variant="h6" fontWeight={600}>
                   {feature.featureName}
                 </Typography>
 
-                {/* وصف */}
-                <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  sx={{ mt: 1 }}
+                >
                   {feature.description}
                 </Typography>
 
-                {/* أنواع الحسابات */}
                 <Stack direction="row" spacing={1} mt={2} flexWrap="wrap">
                   {feature.accountTypeFeatures.length > 0 ? (
                     feature.accountTypeFeatures.map((a) => (
                       <Chip
                         key={a.id}
-                        label={a.accountType?.typeName || `Account ${a.accountTypeId}`}
+                        label={
+                          a.accountType?.typeName ||
+                          `Account ${a.accountTypeId}`
+                        }
                         size="small"
                         color="primary"
                       />
@@ -173,11 +178,15 @@ const fetchAccountTypes = async () => {
       </Paper>
 
       {/* Dialog حذف */}
-      <Dialog open={openDeleteDialog} onClose={() => setOpenDeleteDialog(false)}>
+      <Dialog
+        open={openDeleteDialog}
+        onClose={() => setOpenDeleteDialog(false)}
+      >
         <DialogTitle>Confirm Delete</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Are you sure you want to delete feature "{featureToDelete?.featureName}"?
+            Are you sure you want to delete feature "
+            {featureToDelete?.featureName}"?
           </DialogContentText>
         </DialogContent>
         <DialogActions>

@@ -2,25 +2,23 @@ import { DrawerHeader, Drawer } from "./DrawerStyles";
 import { Avatar, Divider, List, IconButton, Typography } from "@mui/material";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 import { useAuth } from "../../context/AuthContext";
-import { sidebarManager } from "./sidebar-items.js";
-import { sidebarAdmin } from "./sidebar-items.js";
-
-import { sidebarTeller } from "./sidebar-items.js";
-
+import { sidebarManager, sidebarAdmin, sidebarTeller } from "./sidebar-items.js";
 import { useTheme } from "@mui/material/styles";
 import SideBaraItem from "./SideBaraItem.jsx";
 
 export default function Sidebar({ open, toggle }) {
   const theme = useTheme();
- const { role } = useAuth();
-const sidebars = {
-  Admin: sidebarAdmin,
-  Manager: sidebarManager,
-  Teller: sidebarTeller,
-};
+  const { role, user } = useAuth(); 
 
-const activeSidebar = sidebars[role] ;
-return (
+  const sidebars = {
+    Admin: sidebarAdmin,
+    Manager: sidebarManager,
+    Teller: sidebarTeller,
+  };
+
+  const activeSidebar = sidebars[role] || []; 
+
+  return (
     <Drawer variant="permanent" open={open}>
       <DrawerHeader>
         <IconButton onClick={toggle}>
@@ -38,12 +36,9 @@ return (
           my: 1,
           transition: "0.2s",
         }}
-        src="/avatar.jpg"
+        src="/public/images/image.png"
       />
 
-      <Typography align="center" sx={{ opacity: open ? 1 : 0, transition: "0.2s" }}>
-        Mohammed W.
-      </Typography>
 
       <Typography
         align="center"
@@ -53,25 +48,20 @@ return (
           color: theme.palette.info.main,
         }}
       >
-        Admin
+        {role || "Guest"} 
       </Typography>
 
       <Divider />
 
       {activeSidebar.map((section) => (
-
-        <>
-         <List key={section.id}>
-          {section.items.map((item) => (
-            <SideBaraItem key={item.path} item={item} open={open} />
-            
-          ))}
-        </List>
-        <Divider/>
-        </>
-       
-        
-       
+        <div key={section.id}>
+          <List>
+            {section.items.map((item) => (
+              <SideBaraItem key={item.path} item={item} open={open} />
+            ))}
+          </List>
+          <Divider />
+        </div>
       ))}
     </Drawer>
   );

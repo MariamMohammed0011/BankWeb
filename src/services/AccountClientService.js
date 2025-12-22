@@ -12,7 +12,7 @@ export const useAccountService = () => {
    * @param {number} clientId
    * @param {number} accountTypeId
    * @param {number} balance
-   * @param {string} createdAt (YYYY-MM-DD)
+   * @param {string} createdAt 
    */
   const addAccount = async (clientId, accountTypeId, balance, createdAt) => {
     setLoading(true);
@@ -46,7 +46,7 @@ const getAllAccounts = async () => {
 
     try {
       const res = await axios.get("/Account/GetAllAccounts");
-      return res.data.data; // array of accounts
+      return res.data.data; 
     } catch (err) {
       const message =
         err.response?.data?.message || "خطأ أثناء تحميل الحسابات";

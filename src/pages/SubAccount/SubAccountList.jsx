@@ -34,7 +34,10 @@ export default function SubAccountList() {
 
   return (
     <Box sx={{ width: "90%", mx: "auto", mt: 3 }}>
-      <Header title="إدارة الحسابات الفرعية" subTitle="عرض وإدارة الحسابات الفرعية" />
+      <Header
+        title="إدارة الحسابات الفرعية"
+        subTitle="عرض وإدارة الحسابات الفرعية"
+      />
 
       <Paper sx={{ p: 4, borderRadius: "16px" }} elevation={3}>
         {loading && <CircularProgress />}
@@ -90,7 +93,10 @@ export default function SubAccountList() {
                   </Tooltip>
 
                   <Tooltip title="حذف">
-                    <IconButton color="error" onClick={() => handleDelete(item.id)}>
+                    <IconButton
+                      color="error"
+                      onClick={() => handleDelete(item.id)}
+                    >
                       <DeleteIcon />
                     </IconButton>
                   </Tooltip>

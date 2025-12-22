@@ -61,10 +61,19 @@ const loadAccountTypes = async () => {
     const data = await getAllAccounts();
     setAccounts(data);
   };
+const handleChange = (e) => {
+  const { name, value } = e.target;
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  setFormData({
+    ...formData,
+    [name]:
+      name === "ParentAccountId" ||
+      name === "subAccountTypeId" ||
+      name === "statusId"
+        ? Number(value)
+        : value,
+  });
+};
 
   const handleBalanceChange = (e) => {
     const value = e.target.value;
@@ -179,7 +188,7 @@ const loadAccountTypes = async () => {
 
           <Divider />
 
-          {/* 🔹 حدود العمليات */}
+          
           <Typography variant="h6" sx={{ color: "#2d3e50", fontWeight: "bold" }}>
             <SecurityIcon sx={{ mr: 1, color: "#ff9800" }} />
             حدود العمليات
@@ -219,7 +228,7 @@ const loadAccountTypes = async () => {
 
           <Divider />
 
-          {/* 🔹 إعدادات إضافية */}
+          
           <TextField
             label="أماكن الاستخدام"
             name="UsageAreas"
@@ -250,7 +259,7 @@ const loadAccountTypes = async () => {
             }}
           />
 
-          {/* 🔹 الرصيد */}
+          
           <TextField
             label="الرصيد"
             name="Balance"
@@ -267,7 +276,7 @@ const loadAccountTypes = async () => {
             }}
           />
 
-          {/* 🔹 تاريخ الإنشاء */}
+          
           <TextField
             label="تاريخ الإنشاء"
             type="date"

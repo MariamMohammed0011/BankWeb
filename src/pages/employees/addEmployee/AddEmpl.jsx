@@ -38,14 +38,12 @@ export default function AddEmpl() {
 
     if (!formData.lastName) newErrors.lastName = "Last name is required";
 
-    // ✅ Identity Number validation (12 digits)
     if (!formData.identityNumber) {
       newErrors.identityNumber = "Identity number is required";
     } else if (!/^\d{12}$/.test(formData.identityNumber)) {
       newErrors.identityNumber = "Identity number must be exactly 12 digits";
     }
 
-    // ✅ Phone validation (09 + 8 digits)
     if (!formData.phone) {
       newErrors.phone = "Phone is required";
     } else if (!/^09\d{8}$/.test(formData.phone)) {
@@ -57,14 +55,14 @@ export default function AddEmpl() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-console.log(3);
+    console.log(3);
     const validationErrors = validate();
     console.log(3);
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length > 0) return;
-console.log(4);
+    console.log(4);
     try {
-       console.log(3);
+      console.log(3);
       await addEmployee(formData);
       setTimeout(() => navigate("/"), 1000);
     } catch {
@@ -96,7 +94,7 @@ console.log(4);
               error={!!errors.email}
               helperText={errors.email}
             />
- <ReusableTextField
+            <ReusableTextField
               label="Username"
               value={formData.username}
               onChange={(e) =>
@@ -176,7 +174,7 @@ console.log(4);
               <Button variant="outlined" onClick={() => navigate("/")}>
                 Cancel
               </Button>
-              <Button type="submit" variant="contained" disabled={loading} >
+              <Button type="submit" variant="contained" disabled={loading}>
                 {loading ? "Saving..." : "Save Employee"}
               </Button>
             </Stack>

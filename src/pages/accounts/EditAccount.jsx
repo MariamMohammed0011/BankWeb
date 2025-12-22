@@ -31,7 +31,6 @@ export default function EditAccount() {
     createdAt: accountData?.createdAt || "",
   });
 
-  // جلب أنواع الحسابات
   useEffect(() => {
     const loadTypes = async () => {
       try {
@@ -61,7 +60,7 @@ export default function EditAccount() {
         formData.balance,
         formData.createdAt
       );
-      // بعد التحديث، العودة لقائمة الحسابات
+      
       navigate("/getAllAccount");
     } catch (err) {
       console.error(err);

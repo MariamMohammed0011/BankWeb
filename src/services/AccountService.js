@@ -8,9 +8,6 @@ export const useAccountTypeService = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
 
-  /* =========================
-     ADD ACCOUNT TYPE
-  ========================= */
   const addAccountType = async (formData) => {
     setLoading(true);
     setError(null);
@@ -35,9 +32,6 @@ export const useAccountTypeService = () => {
     }
   };
 
-  /* =========================
-     GET ACCOUNT TYPE BY ID
-  ========================= */
   const getAccountTypeById = async (id) => {
     setLoading(true);
     setError(null);
@@ -53,9 +47,7 @@ export const useAccountTypeService = () => {
     }
   };
 
-  /* =========================
-     (OPTIONAL) GET ALL TYPES
-  ========================= */
+  
   const getAccountTypes = async () => {
     setLoading(true);
     setError(null);

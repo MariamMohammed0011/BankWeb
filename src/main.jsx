@@ -28,6 +28,9 @@ import AddFeature from "./pages/features/AddFeature.jsx";
 import FeatureList from "./pages/features/FeatureList.jsx";
 import SubAccountList from "./pages/SubAccount/SubAccountList.jsx";
 import AddSubAccount from "./pages/SubAccount/AddSubAccount.jsx";
+import Deposit from "./pages/Transactions/Deposit.jsx";
+import Withdrawal from "./pages/Transactions/Withdrawal.jsx";
+import Transfer from "./pages/Transactions/Transfer.jsx";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -55,7 +58,9 @@ const router = createBrowserRouter(
         <Route path="/features/add" element={<AddFeature />} />
         <Route path="/sub-accounts" element={<SubAccountList />} />
         <Route path="/sub-accounts/add" element={<AddSubAccount />} />
-
+        <Route path="/transactions/deposit" element={<Deposit />} />
+        <Route path="/transactions/Withdrawal" element={<Withdrawal />} />
+        <Route path="/transactions/transfer" element={<Transfer />} />
       </Route>
     </>
   )
