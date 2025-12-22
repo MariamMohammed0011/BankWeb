@@ -54,6 +54,7 @@ export const useAccountTypeService = () => {
 
     try {
       const res = await axios.get("/AccountType/all");
+      console.log(res.data);
       return res.data.data;
     } catch (err) {
       setError(err.response?.data?.message || "Error loading account types");
@@ -74,11 +75,26 @@ const updateAccountType = async (id, body) => {
     const res = await axios.put(`AccountType/edit/${id}`, formData);
     return res.data;
   };
+const getAccountStates = async () => {
+  setLoading(true);
+  setError(null);
+
+  try {
+    const res = await axios.get("/AccountState");
+    return res.data.data; // حسب شكل الريسبونس عندك
+  } catch (err) {
+    setError("خطأ أثناء تحميل حالات الحساب");
+    throw err;
+  } finally {
+    setLoading(false);
+  }
+};
 
   return {
     addAccountType,
     getAccountTypeById,
     getAccountTypes,
+    getAccountStates,
     loading,
     error,
     success,

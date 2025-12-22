@@ -59,6 +59,7 @@ export const sidebarManager = [
       { text: "All Accounts", icon: TaskAltOutlined, path: "/getAllAccount" },
      { text: "Add SubAccounts", icon: SubtitlesOutlined, path: "/sub-accounts/add" },
       { text: "SubAccountsList", icon: DnsOutlined, path: "/sub-accounts" },
+       { text: "SubAccounts Hierarchy", icon: DnsOutlined, path: "/accounts/hierarchy" },
       
       { text: "Add Features", icon: ReceiptOutlined, path: "/features/add" },
       { text: "All Features", icon: TaskAltOutlined, path: "/features" },

@@ -25,6 +25,7 @@ import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 
 import { useSubAccountService } from "../../services/SubAccountService";
 import { useAccountService } from "../../services/AccountClientService";
+import { useNavigate } from "react-router-dom";
 
 export default function AddSubAccount() {
   const { addSubAccount, loading, success, error } = useSubAccountService();
@@ -34,10 +35,14 @@ export default function AddSubAccount() {
 const { getAccountTypes } = useAccountTypeService();
 
   const [accounts, setAccounts] = useState([]);
+const { getAccountStates } = useAccountTypeService();
+const [accountStates, setAccountStates] = useState([]);
+
+const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     ParentAccountId: "",
-    statusId : 1,
+    statusId : "",
     subAccountTypeId: "",
     DailyWithdrawalLimit: "",
     TransferLimit: "",
@@ -46,11 +51,12 @@ const { getAccountTypes } = useAccountTypeService();
     Balance: "",
     CreatedAt: "",
   });
-
 useEffect(() => {
   loadAccounts();
   loadAccountTypes();
+  loadAccountStates();
 }, []);
+
 
 const loadAccountTypes = async () => {
   const data = await getAccountTypes();
@@ -61,6 +67,11 @@ const loadAccountTypes = async () => {
     const data = await getAllAccounts();
     setAccounts(data);
   };
+  const loadAccountStates = async () => {
+  const data = await getAccountStates();
+  setAccountStates(data);
+};
+
 const handleChange = (e) => {
   const { name, value } = e.target;
 
@@ -82,19 +93,24 @@ const handleChange = (e) => {
     }
   };
 
-  const handleSubmit = async () => {
-    if (!formData.ParentAccountId || !formData.statusId || !formData.subAccountTypeId) {
-      alert("الرجاء ملء جميع الحقول المطلوبة");
-      return;
-    }
+ const handleSubmit = async () => {
+  if (!formData.ParentAccountId || !formData.statusId || !formData.subAccountTypeId) {
+    alert("الرجاء ملء جميع الحقول المطلوبة");
+    return;
+  }
 
-    await addSubAccount(
-      formData.ParentAccountId,
-      formData.statusId,
-      formData.subAccountTypeId,
-      formData
-    );
-  };
+  const result = await addSubAccount(
+    formData.ParentAccountId,
+    formData.statusId,
+    formData.subAccountTypeId,
+    formData
+  );
+
+  if (result) {
+    navigate("/sub-accounts");
+  }
+};
+
 
   return (
     <Box sx={{ width: "90%", mx: "auto", mt: 3 }}>
@@ -116,50 +132,53 @@ const handleChange = (e) => {
           </Typography>
 
           {/* 🔹 اختر الحساب الرئيسي */}
-          <TextField
-            select
-            label="الحساب الرئيسي"
-            name="ParentAccountId"
-            value={formData.ParentAccountId}
-            onChange={handleChange}
-            fullWidth
-            required
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <AccountBalanceIcon />
-                </InputAdornment>
-              ),
-            }}
-          >
-            {accounts?.map((acc) => (
-              <MenuItem key={acc.clientAccountId} value={acc.clientAccountId}>
-                {acc.accountName || `Account #${acc.clientAccountId}`}
-              </MenuItem>
-            ))}
-          </TextField>
+         <TextField
+  select
+  label="الحساب الرئيسي"
+  name="ParentAccountId"
+  value={formData.ParentAccountId}
+  onChange={handleChange}
+  fullWidth
+  required
+  InputProps={{
+    startAdornment: (
+      <InputAdornment position="start">
+        <AccountBalanceIcon />
+      </InputAdornment>
+    ),
+  }}
+>
+  {accounts?.map((acc) => (
+    <MenuItem key={acc.accountId} value={acc.accountId}>
+      {acc.accountTypeName} - #{acc.accountId}
+    </MenuItem>
+  ))}
+</TextField>
 
-          {/* 🔹 حالة الحساب */}
-          {/* <TextField
-            select
-            label="حالة الحساب"
-            name="statusId"
-            value={formData.statusId}
-            onChange={handleChange}
-            fullWidth
-            required
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <CheckCircleIcon />
-                </InputAdornment>
-              ),
-            }}
-          >
-            <MenuItem value={1}>نشط</MenuItem>
-            <MenuItem value={2}>مجمّد</MenuItem>
-            <MenuItem value={3}>مغلق</MenuItem>
-          </TextField> */}
+         <TextField
+  select
+  label="حالة الحساب"
+  name="statusId"
+  value={formData.statusId}
+  onChange={handleChange}
+  fullWidth
+  required
+  InputProps={{
+    startAdornment: (
+      <InputAdornment position="start">
+        <CheckCircleIcon />
+      </InputAdornment>
+    ),
+  }}
+>
+  {accountStates?.map((state) => (
+  <MenuItem key={state.accountStatusId} value={state.accountStatusId}>
+    {state.statusName}
+  </MenuItem>
+))}
+
+</TextField>
+
 
           {/* 🔹 نوع الحساب الفرعي */}
           <TextField
