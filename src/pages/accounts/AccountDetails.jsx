@@ -1,10 +1,9 @@
 import { Box, Paper, Typography, Stack, Button } from "@mui/material";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
+import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
 import { useLocation, useNavigate } from "react-router-dom";
 import { keyframes, padding } from "@mui/system";
 
-// Animation للدخول
 const fadeInUp = keyframes`
   from {
     opacity: 0;
@@ -29,37 +28,34 @@ export default function AccountDetails() {
         width: "75%",
         mx: "auto",
         mt: 4,
-        direction: "rtl", 
+        direction: "rtl",
         textAlign: "right",
       }}
     >
-      
       <Stack direction="row" alignItems="center" mb={3}>
         <Button
-  variant="outlined"
-  startIcon={<ArrowBackIosNewIcon sx={{ ml: 1.5 }} />} 
-  onClick={() => navigate("/getAllAccount")}
-  sx={{
-    borderRadius: "30px",
-    px: 2,
-    py: 2,
-    textTransform: "none",
-    fontSize: "16px",
-    fontWeight: "bold",
-    borderWidth: "2px",
-    transition: "0.3s",
-    "&:hover": {
-      backgroundColor: "#e8f0fe",
-      borderColor: "#1976d2",
-    },
-  }}
->
-  رجوع لصفحة الحسابات
-</Button>
-
+          variant="outlined"
+          startIcon={<ArrowBackIosNewIcon sx={{ ml: 1.5 }} />}
+          onClick={() => navigate("/getAllAccount")}
+          sx={{
+            borderRadius: "30px",
+            px: 2,
+            py: 2,
+            textTransform: "none",
+            fontSize: "16px",
+            fontWeight: "bold",
+            borderWidth: "2px",
+            transition: "0.3s",
+            "&:hover": {
+              backgroundColor: "#e8f0fe",
+              borderColor: "#1976d2",
+            },
+          }}
+        >
+          رجوع لصفحة الحسابات
+        </Button>
       </Stack>
 
-     
       <Paper
         sx={{
           p: 4,
@@ -75,7 +71,6 @@ export default function AccountDetails() {
           },
         }}
       >
-       
         <Stack
           direction="row"
           alignItems="center"
@@ -87,13 +82,16 @@ export default function AccountDetails() {
           <ManageAccountsOutlinedIcon
             style={{ fontSize: 32, color: "#1976d2", marginLeft: "5px" }}
           />
-          <Typography variant="h5" fontWeight="bold" style={{color: "#1976d2"}}>
+          <Typography
+            variant="h5"
+            fontWeight="bold"
+            style={{ color: "#1976d2" }}
+          >
             تفاصيل الحساب البنكي
           </Typography>
         </Stack>
 
-        
-        <Box sx={{ mt: 5, lineHeight: 5 }} >
+        <Box sx={{ mt: 5, lineHeight: 5 }}>
           <Typography variant="body1" fontSize="18px" mb={2}>
             <strong>اسم العميل:</strong> {account.clientFullName}
           </Typography>

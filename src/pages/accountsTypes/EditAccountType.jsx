@@ -137,7 +137,7 @@ export default function EditAccountType() {
           sx={{ mb: 3 }}
         />
 
-        {/* annualInterestRate */}
+        
         <TextField
           label="الفائدة السنوية (%)"
           fullWidth

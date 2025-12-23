@@ -64,14 +64,13 @@ for (let [key, value] of formData.entries()) {
   }
 };
 
-// ➤ Get All Sub Accounts
 const getSubAccounts = async () => {
   setLoading(true);
   setError(null);
 
   try {
     const res = await axios.get("/SubAccount/Get_All_Sub_Accounts");
-    return res.data.data; // حسب الجسون اللي عرضتيه
+    return res.data.data; 
   } catch (err) {
     setError("خطأ أثناء جلب الحسابات الفرعية");
     throw err;
@@ -89,7 +88,7 @@ const getSubAccountsHierarchy = async (subAccountId) => {
   } catch (err) {
     console.error("RESPONSE ERROR:", err.response?.data);
     setError("خطأ أثناء جلب الهيكلية");
-    return []; // ← هكذا نتجنب تحطم الـ Component
+    return []; 
   } finally {
     setLoading(false);
   }
@@ -99,7 +98,7 @@ const getSubAccountsHierarchy = async (subAccountId) => {
   return {
     addSubAccount,
     getSubAccounts,
-    getSubAccountsHierarchy, // <- أضفنا الدالة هنا
+    getSubAccountsHierarchy, 
     loading,
     error,
     success,

@@ -65,12 +65,15 @@ export const sidebarManager = [
       { text: "All Features", icon: TaskAltOutlined, path: "/features" },
     
       { text: "Approvals Pending", icon: HistoryOutlined, path: "/approvals/pending" },
+      { text: "Reports", icon: BarChartOutlined, path: "/getReport" },
+
     ],
   },
   {
     id: "tools",
     items: [
-      
+       { text: "State of Account", icon: ReceiptOutlined, path: "/stateOfAccounts" },
+     
       { text: "Complaint History", icon: HistoryOutlined, path: "/history" },
       { text: "Notifications", icon: NotificationsOutlined, path: "/notifications" },
       { text: "Messages", icon: ChatOutlined, path: "/messages" },
@@ -103,9 +106,11 @@ export const sidebarTeller = [
   {
     id: "tools",
     items: [
+       { text: "State of Account", icon: ReceiptOutlined, path: "/stateOfAccounts" },
+     
       { text: "Notifications", icon: NotificationsOutlined, path: "/notifications" },
       { text: "Messages", icon: ChatOutlined, path: "/messages" },
-      { text: "Reports", icon: BarChartOutlined, path: "/reports" },
+      { text: "Reports", icon: BarChartOutlined, path: "/getReport" },
     ],
   },
   {

@@ -24,19 +24,16 @@ function App() {
   };
 
   return (
-    
-  
-      <ThemeProvider theme={theme}>
-        <Box sx={{ display: "flex" }}>
-          <SideBar open={open} toggle={toggle} />
-          <TopBar open={open} toggle={toggle} setMode={setMode} />
-          <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-            <DrawerHeader />
-            <Outlet /> 
-          </Box>
+    <ThemeProvider theme={theme}>
+      <Box sx={{ display: "flex" }}>
+        <SideBar open={open} toggle={toggle} />
+        <TopBar open={open} toggle={toggle} setMode={setMode} />
+        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+          <DrawerHeader />
+          <Outlet />
         </Box>
-      </ThemeProvider>
-   
+      </Box>
+    </ThemeProvider>
   );
 }
 

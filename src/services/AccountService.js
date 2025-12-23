@@ -81,7 +81,7 @@ const getAccountStates = async () => {
 
   try {
     const res = await axios.get("/AccountState");
-    return res.data.data; // حسب شكل الريسبونس عندك
+    return res.data.data; 
   } catch (err) {
     setError("خطأ أثناء تحميل حالات الحساب");
     throw err;

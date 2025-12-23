@@ -9,19 +9,26 @@ import {
   TableBody,
   Button,
   CircularProgress,
+  Stack,
 } from "@mui/material";
 
 import { useAccountService } from "../../services/AccountClientService";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
-
+import { useAccountStateService } from "../../services/StateService";
 export default function AllAccounts() {
   const { getAllAccounts } = useAccountService();
   const [accounts, setAccounts] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const {
+    changeState,
+    loading: stateLoading,
+    error,
+    success,
+  } = useAccountStateService();
   const navigate = useNavigate();
-
+  const [activeBtn, setActiveBtn] = useState(null);
   useEffect(() => {
     const load = async () => {
       try {
@@ -86,6 +93,54 @@ export default function AllAccounts() {
                   >
                     تعديل
                   </Button>
+                </TableCell>
+                <TableCell>
+                  <Stack direction="row" spacing={1} alignItems="center">
+                    <select
+                      style={{
+                        padding: "8px",
+                        borderRadius: "6px",
+                        border: "1px solid #ccc",
+                      }}
+                      value={acc.nextState || ""}
+                      onChange={(e) => {
+                        const newState = e.target.value;
+                        setAccounts((prev) =>
+                          prev.map((item) =>
+                            item.clientAccountId === acc.clientAccountId
+                              ? { ...item, nextState: newState }
+                              : item
+                          )
+                        );
+                      }}
+                    >
+                      <option value="">اختر الحالة</option>
+                      <option value="activate">تفعيل</option>
+                      <option value="freeze">تجميد</option>
+                      <option value="suspend">تعليق</option>
+                      <option value="close">إغلاق</option>
+                    </select>
+
+                    <Button
+                      variant="contained"
+                      disabled={stateLoading}
+                      onClick={async () => {
+                        setActiveBtn(acc.clientAccountId);
+
+                        await changeState(
+                          "client",
+                          acc.clientAccountId,
+                          acc.nextState
+                        );
+                      }}
+                    >
+                      {stateLoading && activeBtn === acc.clientAccountId ? (
+                        <CircularProgress size={20} />
+                      ) : (
+                        "تطبيق"
+                      )}
+                    </Button>
+                  </Stack>
                 </TableCell>
               </TableRow>
             ))}

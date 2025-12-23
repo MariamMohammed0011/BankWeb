@@ -19,8 +19,16 @@ import { useAccountService } from "../../services/AccountClientService.js";
 import { useSubAccountService } from "../../services/SubAccountService.js";
 
 export default function AccountHierarchy() {
-  const { getAllAccounts, loading: loadingAccounts, error: errorAccounts } = useAccountService();
-  const { getSubAccountsHierarchy, loading: loadingHierarchy, error: errorHierarchy } = useSubAccountService();
+  const {
+    getAllAccounts,
+    loading: loadingAccounts,
+    error: errorAccounts,
+  } = useAccountService();
+  const {
+    getSubAccountsHierarchy,
+    loading: loadingHierarchy,
+    error: errorHierarchy,
+  } = useSubAccountService();
 
   const [accounts, setAccounts] = useState([]);
   const [selectedAccountId, setSelectedAccountId] = useState("");
@@ -59,7 +67,13 @@ export default function AccountHierarchy() {
         subTitle="اختر حسابًا رئيسيًا لعرض الحسابات الفرعية"
       />
 
-      <Paper sx={{ p: 4, borderRadius: "16px", boxShadow: "0 4px 25px rgba(0,0,0,0.08)" }}>
+      <Paper
+        sx={{
+          p: 4,
+          borderRadius: "16px",
+          boxShadow: "0 4px 25px rgba(0,0,0,0.08)",
+        }}
+      >
         {(loadingAccounts || loadingHierarchy) && (
           <Box sx={{ textAlign: "center", my: 4 }}>
             <CircularProgress size={40} />
@@ -67,7 +81,6 @@ export default function AccountHierarchy() {
         )}
 
         <Stack spacing={2}>
-          {/* اختيار الحساب الرئيسي */}
           <FormControl fullWidth>
             <InputLabel>اختر الحساب الرئيسي</InputLabel>
             <Select
@@ -91,14 +104,12 @@ export default function AccountHierarchy() {
             عرض الهيكلية
           </Button>
 
-          {/* عرض الأخطاء */}
           {(error || errorAccounts || errorHierarchy) && (
             <Typography color="error" sx={{ mt: 1 }}>
               {error || errorAccounts || errorHierarchy}
             </Typography>
           )}
 
-          {/* عرض الحسابات الفرعية بشكل Cards */}
           {hierarchy.length > 0 && (
             <Grid container spacing={3} sx={{ mt: 2 }}>
               {hierarchy.map((sub) => (
@@ -116,12 +127,16 @@ export default function AccountHierarchy() {
                     }}
                   >
                     <Stack spacing={1}>
-                      <Typography variant="h6">حساب فرعي #{sub.subAccountId}</Typography>
+                      <Typography variant="h6">
+                        حساب فرعي #{sub.subAccountId}
+                      </Typography>
 
                       {sub.statusName && (
                         <Chip
                           label={sub.statusName}
-                          color={sub.statusName === "نشط" ? "success" : "warning"}
+                          color={
+                            sub.statusName === "نشط" ? "success" : "warning"
+                          }
                           size="small"
                         />
                       )}

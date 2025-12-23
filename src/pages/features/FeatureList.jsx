@@ -177,7 +177,7 @@ export default function FeatureList() {
         )}
       </Paper>
 
-      {/* Dialog حذف */}
+      
       <Dialog
         open={openDeleteDialog}
         onClose={() => setOpenDeleteDialog(false)}

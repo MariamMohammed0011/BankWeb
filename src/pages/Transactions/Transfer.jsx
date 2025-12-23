@@ -36,7 +36,7 @@ export default function Transfer() {
 
     if (loading) return;
 
-    // التحقق من الحسابات
+    
     if (!formData.FromAccountNumber || isNaN(formData.FromAccountNumber)) {
       toast.error("الرجاء إدخال رقم الحساب المرسل صحيح");
       return;

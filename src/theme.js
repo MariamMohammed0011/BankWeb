@@ -1,10 +1,10 @@
-// src/theme.js
+
 import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#1976D2", // الأزرق المستخدم في AddEmpl
+      main: "#1976D2", 
     },
     secondary: {
       main: "#455A64",

@@ -32,17 +32,17 @@ export default function AddSubAccount() {
   const { getAllAccounts } = useAccountService();
   const [accountTypes, setAccountTypes] = useState([]);
 
-const { getAccountTypes } = useAccountTypeService();
+  const { getAccountTypes } = useAccountTypeService();
 
   const [accounts, setAccounts] = useState([]);
-const { getAccountStates } = useAccountTypeService();
-const [accountStates, setAccountStates] = useState([]);
+  const { getAccountStates } = useAccountTypeService();
+  const [accountStates, setAccountStates] = useState([]);
 
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     ParentAccountId: "",
-    statusId : "",
+    statusId: "",
     subAccountTypeId: "",
     DailyWithdrawalLimit: "",
     TransferLimit: "",
@@ -51,40 +51,39 @@ const navigate = useNavigate();
     Balance: "",
     CreatedAt: "",
   });
-useEffect(() => {
-  loadAccounts();
-  loadAccountTypes();
-  loadAccountStates();
-}, []);
+  useEffect(() => {
+    loadAccounts();
+    loadAccountTypes();
+    loadAccountStates();
+  }, []);
 
-
-const loadAccountTypes = async () => {
-  const data = await getAccountTypes();
-  setAccountTypes(data);
-};
+  const loadAccountTypes = async () => {
+    const data = await getAccountTypes();
+    setAccountTypes(data);
+  };
 
   const loadAccounts = async () => {
     const data = await getAllAccounts();
     setAccounts(data);
   };
   const loadAccountStates = async () => {
-  const data = await getAccountStates();
-  setAccountStates(data);
-};
+    const data = await getAccountStates();
+    setAccountStates(data);
+  };
 
-const handleChange = (e) => {
-  const { name, value } = e.target;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
-  setFormData({
-    ...formData,
-    [name]:
-      name === "ParentAccountId" ||
-      name === "subAccountTypeId" ||
-      name === "statusId"
-        ? Number(value)
-        : value,
-  });
-};
+    setFormData({
+      ...formData,
+      [name]:
+        name === "ParentAccountId" ||
+        name === "subAccountTypeId" ||
+        name === "statusId"
+          ? Number(value)
+          : value,
+    });
+  };
 
   const handleBalanceChange = (e) => {
     const value = e.target.value;
@@ -93,24 +92,27 @@ const handleChange = (e) => {
     }
   };
 
- const handleSubmit = async () => {
-  if (!formData.ParentAccountId || !formData.statusId || !formData.subAccountTypeId) {
-    alert("الرجاء ملء جميع الحقول المطلوبة");
-    return;
-  }
+  const handleSubmit = async () => {
+    if (
+      !formData.ParentAccountId ||
+      !formData.statusId ||
+      !formData.subAccountTypeId
+    ) {
+      alert("الرجاء ملء جميع الحقول المطلوبة");
+      return;
+    }
 
-  const result = await addSubAccount(
-    formData.ParentAccountId,
-    formData.statusId,
-    formData.subAccountTypeId,
-    formData
-  );
+    const result = await addSubAccount(
+      formData.ParentAccountId,
+      formData.statusId,
+      formData.subAccountTypeId,
+      formData
+    );
 
-  if (result) {
-    navigate("/sub-accounts");
-  }
-};
-
+    if (result) {
+      navigate("/sub-accounts");
+    }
+  };
 
   return (
     <Box sx={{ width: "90%", mx: "auto", mt: 3 }}>
@@ -125,60 +127,62 @@ const handleChange = (e) => {
         }}
       >
         <Stack spacing={4}>
-          {/* 🔹 عنوان */}
-          <Typography variant="h6" sx={{ color: "#2d3e50", fontWeight: "bold" }}>
+          <Typography
+            variant="h6"
+            sx={{ color: "#2d3e50", fontWeight: "bold" }}
+          >
             <CategoryIcon sx={{ mr: 1, color: "#0288d1" }} />
             بيانات الحساب الفرعي
           </Typography>
 
-          {/* 🔹 اختر الحساب الرئيسي */}
-         <TextField
-  select
-  label="الحساب الرئيسي"
-  name="ParentAccountId"
-  value={formData.ParentAccountId}
-  onChange={handleChange}
-  fullWidth
-  required
-  InputProps={{
-    startAdornment: (
-      <InputAdornment position="start">
-        <AccountBalanceIcon />
-      </InputAdornment>
-    ),
-  }}
->
-  {accounts?.map((acc) => (
-    <MenuItem key={acc.accountId} value={acc.accountId}>
-      {acc.accountTypeName} - #{acc.accountId}
-    </MenuItem>
-  ))}
-</TextField>
+          <TextField
+            select
+            label="الحساب الرئيسي"
+            name="ParentAccountId"
+            value={formData.ParentAccountId}
+            onChange={handleChange}
+            fullWidth
+            required
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <AccountBalanceIcon />
+                </InputAdornment>
+              ),
+            }}
+          >
+            {accounts?.map((acc) => (
+              <MenuItem key={acc.accountId} value={acc.accountId}>
+                {acc.accountTypeName} - #{acc.accountId}
+              </MenuItem>
+            ))}
+          </TextField>
 
-         <TextField
-  select
-  label="حالة الحساب"
-  name="statusId"
-  value={formData.statusId}
-  onChange={handleChange}
-  fullWidth
-  required
-  InputProps={{
-    startAdornment: (
-      <InputAdornment position="start">
-        <CheckCircleIcon />
-      </InputAdornment>
-    ),
-  }}
->
-  {accountStates?.map((state) => (
-  <MenuItem key={state.accountStatusId} value={state.accountStatusId}>
-    {state.statusName}
-  </MenuItem>
-))}
-
-</TextField>
-
+          <TextField
+            select
+            label="حالة الحساب"
+            name="statusId"
+            value={formData.statusId}
+            onChange={handleChange}
+            fullWidth
+            required
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <CheckCircleIcon />
+                </InputAdornment>
+              ),
+            }}
+          >
+            {accountStates?.map((state) => (
+              <MenuItem
+                key={state.accountStatusId}
+                value={state.accountStatusId}
+              >
+                {state.statusName}
+              </MenuItem>
+            ))}
+          </TextField>
 
           {/* 🔹 نوع الحساب الفرعي */}
           <TextField
@@ -198,17 +202,18 @@ const handleChange = (e) => {
             }}
           >
             {accountTypes?.map((type) => (
-  <MenuItem key={type.accountTypeId} value={type.accountTypeId}>
-    {type.typeName}
-  </MenuItem>
-))}
-
+              <MenuItem key={type.accountTypeId} value={type.accountTypeId}>
+                {type.typeName}
+              </MenuItem>
+            ))}
           </TextField>
 
           <Divider />
 
-          
-          <Typography variant="h6" sx={{ color: "#2d3e50", fontWeight: "bold" }}>
+          <Typography
+            variant="h6"
+            sx={{ color: "#2d3e50", fontWeight: "bold" }}
+          >
             <SecurityIcon sx={{ mr: 1, color: "#ff9800" }} />
             حدود العمليات
           </Typography>
@@ -247,7 +252,6 @@ const handleChange = (e) => {
 
           <Divider />
 
-          
           <TextField
             label="أماكن الاستخدام"
             name="UsageAreas"
@@ -278,7 +282,6 @@ const handleChange = (e) => {
             }}
           />
 
-          
           <TextField
             label="الرصيد"
             name="Balance"
@@ -295,7 +298,6 @@ const handleChange = (e) => {
             }}
           />
 
-          
           <TextField
             label="تاريخ الإنشاء"
             type="date"
@@ -306,12 +308,10 @@ const handleChange = (e) => {
             InputLabelProps={{ shrink: true }}
           />
 
-          {/* رسائل */}
           {error && <Typography color="error">{error}</Typography>}
           {success && <Typography color="green">{success}</Typography>}
           {loading && <CircularProgress />}
 
-          {/* زر الحفظ */}
           <Button
             variant="contained"
             onClick={handleSubmit}

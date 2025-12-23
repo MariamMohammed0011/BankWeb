@@ -37,7 +37,7 @@ const PendingApprovals = () => {
   const handleApprove = async (id) => {
     try {
       await approve(id);
-      getPendingApprovals(); // refresh list
+      getPendingApprovals(); 
     } catch {
       alert("خطأ أثناء الموافقة");
     }
@@ -46,7 +46,7 @@ const PendingApprovals = () => {
   const handleReject = async (id) => {
     try {
       await reject(id);
-      getPendingApprovals(); // refresh list
+      getPendingApprovals(); 
     } catch {
       alert("خطأ أثناء الرفض");
     }

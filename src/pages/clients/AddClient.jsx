@@ -34,6 +34,7 @@ export default function AddClient() {
     AccountPurpose: "",
     Phone: "",
     Username: "",
+    Email:"",
     Password: "",
   });
 
@@ -192,7 +193,16 @@ export default function AddClient() {
               error={!!errors.Username}
               helperText={errors.Username}
             />
-
+             <TextField
+              label=" البريد الالكتروني"
+              name="Email"
+              type="email"
+              value={formData.Email}
+              onChange={handleChange}
+              error={!!errors.Email}
+              helperText={errors.Email}
+            />
+        
             <TextField
               label="كلمة المرور"
               name="Password"

@@ -72,9 +72,9 @@ export default function AddFeature() {
 
     try {
       const createdFeature = await addFeature(formData);
-      const id = createdFeature.featureId; // تأكد أن الـ API يرجع featureId
+      const id = createdFeature.featureId;
       setFeatureId(id);
-      setModalOpen(true); // فتح الـ modal بعد الحفظ
+      setModalOpen(true);
     } catch (err) {
       console.log(err);
     }

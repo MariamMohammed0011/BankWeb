@@ -168,7 +168,7 @@ export default function AddEmpl() {
               <MenuItem value="Manager">Manager</MenuItem>
             </ReusableTextField>
 
-            {/* باقي الحقول نفسها */}
+           
 
             <Stack direction="row" justifyContent="flex-end" spacing={2}>
               <Button variant="outlined" onClick={() => navigate("/")}>

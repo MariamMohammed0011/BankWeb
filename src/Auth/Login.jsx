@@ -29,7 +29,7 @@ function Login() {
       console.log(data.role);
       login(data.token, data.role);
 
-      // Strategy
+      
       const strategy = LoginStrategyFactory.getStrategy(data.role);
       strategy.loginAction(data, navigate);
     } catch (err) {
