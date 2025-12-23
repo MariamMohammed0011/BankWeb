@@ -25,7 +25,7 @@ export const sidebarAdmin  = [
   {
     id: "main",
     items: [
-      { text: "Dashboard", icon: HomeOutlined, path: "/" },
+      { text: "Dashboard", icon: HomeOutlined, path: "/dashboard" },
       { text: "Manage Employees", icon: PeopleOutlineOutlined, path: "/employees/create" },
       ],
   },
@@ -33,7 +33,7 @@ export const sidebarAdmin  = [
     id: "system",
     items: [
       
-      { text: "Statistics & Reports", icon: AddchartOutlined, path: "/form" },
+      { text: "Statistics & Reports", icon: AddchartOutlined, path: "/reports" },
       { text: "Sys Logs / Tracing", icon: DnsOutlined, path: "/calender" },
       { text: "Backup & Restore", icon: CloudSyncOutlined, path: "/faq" },
     ],
@@ -65,7 +65,7 @@ export const sidebarManager = [
       { text: "All Features", icon: TaskAltOutlined, path: "/features" },
     
       { text: "Approvals Pending", icon: HistoryOutlined, path: "/approvals/pending" },
-      { text: "Reports", icon: BarChartOutlined, path: "/getReport" },
+      { text: "Reports", icon: BarChartOutlined, path: "/reports" },
 
     ],
   },

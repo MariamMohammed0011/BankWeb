@@ -35,6 +35,7 @@ import PendingApprovals from "./pages/PendingApprovals.jsx";
 import AccountHierarchy from "./pages/accounts/AccountHierarchy.jsx";
 import AccountStateManager from "./pages/accounts/AccountStateManager.jsx";
 import DailyTransactionReport from "./pages/transaction/DailyTransactionReport.jsx";
+import Dashboard from "./pages/Dashboard/Dashboard.jsx";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -48,6 +49,8 @@ const router = createBrowserRouter(
           </ProtectedRoute>
         }
       >
+        <Route path="/dashboard" element={<Dashboard />} />
+
         <Route path="employees/create" element={<AddEmpl />} />
         <Route path="accountType" element={<AddAccountType />} />
         <Route path="account-types" element={<AccountTypeList />} />

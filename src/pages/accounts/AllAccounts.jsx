@@ -52,7 +52,7 @@ export default function AllAccounts() {
     <Box sx={{ width: "90%", mx: "auto", mt: 3 }}>
       <Header title="جميع الحسابات البنكية" />
 
-      <Paper sx={{ p: 2 }}>
+      <Paper sx={{ p: 1 }}>
         <Table>
           <TableHead>
             <TableRow>
@@ -83,7 +83,7 @@ export default function AllAccounts() {
                   </Button>
 
                   <Button
-                    sx={{ ml: 1 }}
+                    sx={{ mt: 1 }}
                     variant="contained"
                     onClick={() =>
                       navigate(`/accounts/edit/${acc.clientAccountId}`, {
